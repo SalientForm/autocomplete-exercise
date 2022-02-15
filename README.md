@@ -20,3 +20,5 @@ If you encounter an issue running the app, install Nx globally and try `npm star
 Or  
 
 `npm i -g @nrwl/cli@latest`
+
+The relevant React code is found in `/apps/client`
