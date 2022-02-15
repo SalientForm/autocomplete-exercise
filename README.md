@@ -1,6 +1,6 @@
 # Autocomplete Exercise
 
-React exercise for BioBot.
+React exercise.
 
 [Nx](https://nx.dev/getting-started/intro) was used to create the boilerplate for this exercise.
 
