@@ -19,4 +19,4 @@ If you encounter an issue running the app, install Nx globally and try `npm star
  
 Or  
 
-`npm i -g @nrwl/cli@12.0.1`
+`npm i -g @nrwl/cli@latest`
