@@ -23,6 +23,6 @@ Or
 
 `npm i -g @nrwl/cli@latest`
 
-## Relevant Work
+## Where is the React code?
 
 The relevant React code is found in `/apps/client`
