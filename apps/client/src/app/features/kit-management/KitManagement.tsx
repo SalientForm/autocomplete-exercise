@@ -1,128 +1,63 @@
-import { KitTrackingCard } from './KitTrackingCard';
+import { KitTrackingRecordSearch } from './KitTrackingRecordSearch';
+import { Route, Routes } from 'react-router-dom';
+import { Button } from '@mui/material';
+import { HomeView } from '../home/HomeView';
+import { KitTrackingRecordDetail } from './KitTrackingRecordDetail';
+import { mockKitTrackingData } from '../../core/kits/kit.mock';
 import {
   convertKitTrackingDataItem,
   KitTrackingRecord,
 } from '../../core/kits/kit.model';
-import { mockKitTrackingData } from '../../core/kits/kit.mock';
-import { useEffect, useState } from 'react';
-import { Button, ButtonGroup, TextField } from '@mui/material';
-import { KitAutocompleteSelect } from './KitAutocompleteSelect';
+import { useNavigate } from "react-router-dom";
 
-const getFetchedRecords = (filter: string) =>
-  mockKitTrackingData
-    .map((dataItem) => convertKitTrackingDataItem(dataItem))
-    .filter(
-      (record) =>
-        !filter ||
-        record.id.toString().includes(filter) ||
-        record.labelId.toString().includes(filter) ||
-        record.shippingTrackingCode.toString().includes(filter)
-    );
-
-const kitTrackingRecordViewTypes = {
-  card: 'card',
-  table: 'table',
+export type TrackingRecordService = {
+  fetchRecords: (filter?: string) => KitTrackingRecord[];
 };
 
-function renderTableView(records: KitTrackingRecord[]) {
-  return (
-    <div>Table view not implemented yet.</div>
-    // <div className="table-container">
-    //   {records.map((record) => (
-    //     <KitTrackingCard record={record}></KitTrackingCard>
-    //   ))}
-    // </div>
-  );
-}
-
-const renderCardView = (records: KitTrackingRecord[]) => (
-  <div className="card-container">
-    {records.map((record) => (
-      <KitTrackingCard record={record}></KitTrackingCard>
-    ))}
-  </div>
-);
-
-export function KitManagement() {
-  const [fetchedRecords, setFetchedRecords] = useState<KitTrackingRecord[]>([]);
-  const [viewType, setViewType] = useState<string>(
-    kitTrackingRecordViewTypes.card
-  );
-  const [filter, setFilter] = useState<string>('');
-
-  useEffect(() => {
-    setFetchedRecords(getFetchedRecords(filter));
-  }, [filter]);
-
-  // TODO: move outside function
-  const trackingRecordView = () => {
-    if (fetchedRecords?.length === 0) return <div>No records loaded.</div>;
-    return viewType === kitTrackingRecordViewTypes.card
-      ? renderCardView(fetchedRecords)
-      : renderTableView(fetchedRecords);
-  };
-
-  /**
-   * calling this function mocks a fetch call that results in setting the data
-   */
-  function fetchRecords() {
-    setFetchedRecords(getFetchedRecords(filter));
-  }
-
-  // TODO: move outside function
-  function getViewButton() {
-    if (viewType === kitTrackingRecordViewTypes.card) {
-      return (
-        <Button
-          variant="contained"
-          onClick={() => setViewType(kitTrackingRecordViewTypes.table)}
-        >
-          Table view
-        </Button>
+/**
+ * lame mock of a fetching service
+ */
+const trackingRecordService: TrackingRecordService = {
+  fetchRecords: (filter = '') => {
+    return mockKitTrackingData
+      .map((dataItem) => convertKitTrackingDataItem(dataItem))
+      .filter(
+        (record) =>
+          !filter ||
+          record.id.toString().includes(filter) ||
+          record.labelId.toString().includes(filter) ||
+          record.shippingTrackingCode.toString().includes(filter)
       );
-    }
+  },
+};
 
-    return (
-      <Button
-        variant="contained"
-        onClick={() => setViewType(kitTrackingRecordViewTypes.card)}
-      >
-        Card view
-      </Button>
-    );
-  }
-
+/**
+ * Feature KitManagement
+ *
+ */
+export function KitManagement() {
+  const navigate = useNavigate();
   return (
     <>
       <h2>Kit Management</h2>
 
-      <p>
-        <ButtonGroup>
-          <Button variant="contained" onClick={fetchRecords}>
-            Load Records
-          </Button>
-          {getViewButton()}
-        </ButtonGroup>
-      </p>
-
-      <p>
-        <KitAutocompleteSelect trackingRecords={fetchedRecords} />
-      </p>
-
-      <p>
-        <TextField
-          onChange={(e) => {
-            setFilter(e.target.value);
-            console.log('filter', filter, e.target.value);
-            fetchRecords();
-          }}
-        />
-      </p>
-
-      <div>
-        <h3>Tracking records ({viewType} view)</h3>
-        {trackingRecordView()}
+      <div className="main-nav">
+      <Button variant="contained" onClick={()=>navigate('/')}>Home</Button>
+      <Button variant="contained" onClick={()=>navigate('/search')}>Search</Button>
+      <Button variant="contained" onClick={()=>navigate('/detail')}>Detail</Button>
       </div>
+
+      <Routes>
+        <Route path="/" element={<HomeView />} />
+        <Route
+          path="/search"
+          element={<KitTrackingRecordSearch trackingRecordService={trackingRecordService} />}
+        />
+        <Route
+          path="/detail"
+          element={<KitTrackingRecordDetail trackingRecordService={trackingRecordService} />}
+        />
+      </Routes>
     </>
   );
 }
