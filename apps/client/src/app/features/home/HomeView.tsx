@@ -33,7 +33,7 @@ export function HomeView() {
           <li>Perhaps use the mock user data.</li>
         </ul>
         <h4>Addressing Scaling</h4>
-        Though I am unsure what is being sought out here, there are a few ideas that come to mind.
+        Though I am unsure what is being sought out here, there are a few ideas that come to mind that could be added to this implementation for the purpose of scaling.
         <ul>
           <li>
             Virtual scrolling mechanism that renders only the visible elements.
