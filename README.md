@@ -1,8 +1,8 @@
 # Autocomplete Exercise
 
-React exercise for BioBot.
+[Nx](https://nx.dev/getting-started/intro) was used to create the boilerplate for this exercise.
 
-To run
+## To run
 
 1. `git clone https://github.com/SalientForm/autocomplete-exercise.git`      
 2. `cd autocomplete-exercise`  
@@ -19,4 +19,8 @@ If you encounter an issue running the app, install Nx globally and try `npm star
  
 Or  
 
-`npm i -g @nrwl/cli@12.0.1`
+`npm i -g @nrwl/cli@latest`
+
+## Where is the React code?
+
+The relevant React code is found in `/apps/client`
