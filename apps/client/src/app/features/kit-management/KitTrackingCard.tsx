@@ -13,7 +13,7 @@ export function KitTrackingCard({ record }: Props) {
           <span className="label-id">Label: {record.labelId}</span>
         </div>
         <div className="tracking-code">
-          Record: {record.shippingTrackingCode}
+          FedEx Tracking: {record.shippingTrackingCode}
         </div>
       </CardContent>
     </Card>

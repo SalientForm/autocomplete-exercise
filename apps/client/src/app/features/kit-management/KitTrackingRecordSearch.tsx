@@ -24,7 +24,7 @@ function renderTableView(records: KitTrackingRecord[]) {
 
 function renderCardView(records: KitTrackingRecord[]) {
   return (
-    <div className="card-container">
+    <div className="cards-container">
       {records.map((record) => (
         <KitTrackingCard record={record}></KitTrackingCard>
       ))}
@@ -45,7 +45,7 @@ function trackingRecordView(
 ) {
   // no records displayed
   if (fetchedRecords?.length === 0)
-    return <div>No records loaded. (Click load records above)</div>;
+    return <div>No records loaded.</div>;
   return viewType === kitTrackingRecordViewTypes.card
     ? renderCardView(fetchedRecords)
     : renderTableView(fetchedRecords);
@@ -86,7 +86,7 @@ export function KitTrackingRecordSearch({ trackingRecordService }: Props) {
 
   return (
     <>
-      <h3>Search</h3>
+      <h3>Filtered Search</h3>
       <p>
         <ButtonGroup>
           <Button
@@ -109,7 +109,7 @@ export function KitTrackingRecordSearch({ trackingRecordService }: Props) {
 
       <div>
         <h3>Tracking records ({viewType} view)</h3>
-        {trackingRecordView(fetchedRecords, viewType)}
+        <div className="scrolling">{trackingRecordView(fetchedRecords, viewType)}</div>
       </div>
     </>
   );
