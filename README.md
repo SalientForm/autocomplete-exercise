@@ -2,6 +2,8 @@
 
 React exercise for BioBot.
 
+[Nx](https://nx.dev/getting-started/intro) was used to create the boilerplate.
+
 To run
 
 1. `git clone https://github.com/SalientForm/autocomplete-exercise.git`      
