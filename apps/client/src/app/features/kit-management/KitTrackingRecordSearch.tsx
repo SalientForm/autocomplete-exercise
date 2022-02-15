@@ -86,7 +86,7 @@ export function KitTrackingRecordSearch({ trackingRecordService }: Props) {
 
   return (
     <>
-      <h3>Filtered Search</h3>
+      <h3>Filtered Search ({viewType} view)</h3>
       <p>
         <ButtonGroup>
           <Button
@@ -108,7 +108,7 @@ export function KitTrackingRecordSearch({ trackingRecordService }: Props) {
       </p>
 
       <div>
-        <h3>Tracking records ({viewType} view)</h3>
+        <h4>Results ({fetchedRecords.length} records)</h4>
         <div className="scrolling">{trackingRecordView(fetchedRecords, viewType)}</div>
       </div>
     </>
