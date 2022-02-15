@@ -10,7 +10,7 @@ export function HomeView() {
           full-stack context).
         </p>
         <p>
-          Prior to this I have worked with React but, when I started this
+          Prior to this I have worked with React, but when I started this
           exercise I was cold on React. If my submission is directly compared
           with full-time senior React developers, I may be at a serious
           disadvantage. (Other non-React work samples are available at request.)
